@@ -1,5 +1,7 @@
 # 🚚 Delivery Performance Analysis
 
+![Image](https://github.com/user-attachments/assets/32d87f2d-0f3a-4337-aa2f-7b6b9e3b04a8)
+
 ## 📌 Project Overview
 This project analyzes delivery operations to identify key factors influencing delivery success, delays, failures, and cost efficiency. Using regression analysis and descriptive statistics, the study provides data-driven insights to support logistics planning and operational decision-making.
 
