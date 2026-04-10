@@ -7,40 +7,24 @@ This project analyzes delivery operations to identify key factors influencing de
 
 ---
 
-## 🎯 Research Questions
+## 🎯 Objectives
 The project answers the following business questions:
 
 1. Which delivery partner has the highest success rate?  
-2. Which vehicle type is most cost-efficient relative to:
-   - Distance  
-   - Package weight  
+2. Which vehicle type is most cost-efficient relative to distance and package weight?  
 3. Which region has the highest delivery success, failures, and delays?  
-4. How do weather conditions affect delivery success, failure, and delay?  
+4. How do weather conditions affect delivery success, delay, and failure?  
 5. What effect does weather have on delivery cost?  
 
 ---
 
 ## 📊 Key Findings
 
-- **Delivery Partner Performance:**  
-  FedEx recorded the highest delivery success rate.
-
-- **Cost Drivers:**  
-  Delivery cost is driven by:
-  - Distance (₦4.99 per km)  
-  - Package weight (₦2.95 per kg)  
-  Vehicle type is not a significant predictor.
-
-- **Regional Performance:**  
-  - West → Highest delivery success and failures  
-  - Central → Highest delays  
-
-- **Impact of Weather:**  
-  - Rainy weather increases delays and failures  
-  - Clear and hot weather improve delivery success  
-
-- **Weather vs Cost:**  
-  Weather conditions do not significantly affect delivery cost.
+- **FedEx** has the highest delivery success rate  
+- Delivery cost is driven by **distance and package weight**, not vehicle type  
+- **West region** → highest success & failures | **Central** → highest delays  
+- **Rainy weather worsens performance**, while **clear/hot weather improves it**  
+- Weather does **not affect delivery cost**
 
 ---
 
@@ -54,47 +38,88 @@ The project answers the following business questions:
 
 ## 📉 Regression Analysis Results
 
-### 1. Delivery Cost Model (Distance, Weight, Vehicle Type)
+### 1. Delivery Cost Model
 
-| Variable        | Coefficient | Significance |
-|----------------|------------|--------------|
-| Intercept      | (Constant) | — |
-| Distance       | 4.99       | Significant (p < 0.001) |
-| Weight         | 2.95       | Significant (p < 0.001) |
-| Vehicle Type   | ~0         | Not Significant (p > 0.05) |
+| Variable      | Coefficient | Significance |
+|--------------|------------|--------------|
+| Distance     | 4.99       | Significant (p < 0.001) |
+| Weight       | 2.95       | Significant (p < 0.001) |
+| Vehicle Type | ~0         | Not Significant |
 
-**Model Summary:**
-- R² = 0.991  
-- F-statistic = 396,474 (p < 0.001)  
+**Model Summary:**  
+R² = 0.991 | F = 396,474 (p < 0.001)
 
 **Interpretation:**  
-The regression model shows that delivery cost is strongly explained by distance and package weight, accounting for 99.1% of the variation in cost. Specifically, each additional kilometer increases delivery cost by approximately ₦4.99, while each additional kilogram increases cost by ₦2.95. Vehicle type was not statistically significant, indicating that it does not meaningfully influence cost when distance and weight are controlled for. This implies that pricing decisions should focus primarily on distance and package weight rather than vehicle category.
+Delivery cost is strongly explained by distance and package weight. Vehicle type does not significantly influence cost, meaning pricing decisions should focus on logistics variables rather than transport mode.
 
 ---
 
-### 2. Weather Impact on Delivery Outcomes
+## 🌦️ Weather Impact on Delivery Outcomes
 
-| Weather Condition | Effect on Success | Effect on Delay | Effect on Failure |
-|------------------|------------------|-----------------|-------------------|
-| Rainy            | Decreases        | Increases       | Increases         |
-| Foggy            | Slight impact    | Slight increase | Minimal           |
-| Clear/Hot        | Increases        | Decreases       | Decreases         |
+### (a) Delivery Success Model
+
+| Variable | Coefficient | P-value | Interpretation |
+|----------|------------|--------|----------------|
+| Intercept | 0.7121 | 0.000 | Base success rate |
+| Foggy | -0.0152 | 0.0649 | Not significant |
+| Rainy | -0.0856 | <0.001 | Significant decrease |
+| Hot | 0.1168 | <0.001 | Significant increase |
+| Clear | 0.1136 | <0.001 | Significant increase |
+
+**Model Summary:**  
+R² = 0.0266 | F = 170.43 (p < 0.001)
 
 **Interpretation:**  
-Weather conditions significantly affect delivery performance. Adverse conditions, particularly rain, reduce delivery success and increase both delays and failures. In contrast, favorable weather conditions improve delivery efficiency.
+Rainy weather significantly reduces delivery success, while hot and clear conditions significantly improve success rates. Foggy weather has no statistically significant effect.
 
 ---
 
-### 3. Weather Impact on Delivery Cost
+### (b) Delivery Delay Model
 
-| Metric        | Value |
-|--------------|------|
-| R²           | 0.00005 |
-| F-statistic  | 0.257 |
-| p-value      | 0.937 |
+| Variable | Coefficient | P-value | Interpretation |
+|----------|------------|--------|----------------|
+| Intercept | 0.2275 | 0.000 | Base delay rate |
+| Foggy | 0.0164 | 0.0325 | Slight increase |
+| Rainy | 0.0722 | <0.001 | Strong increase |
+| Hot | -0.0888 | <0.001 | Significant decrease |
+| Clear | -0.0849 | <0.001 | Significant decrease |
+
+**Model Summary:**  
+R² = 0.0191 | F = 121.87 (p < 0.001)
 
 **Interpretation:**  
-The regression results indicate that weather conditions do not significantly influence delivery cost. The model explains almost none of the variation in cost, suggesting that pricing is independent of weather and driven by operational variables such as distance and weight.
+Rainy weather significantly increases delays, while hot and clear conditions significantly reduce delays. Foggy weather has a mild but significant impact.
+
+---
+
+### (c) Delivery Failure Model
+
+| Variable | Coefficient | P-value | Interpretation |
+|----------|------------|--------|----------------|
+| Intercept | 0.0604 | 0.000 | Base failure rate |
+| Foggy | -0.0012 | 0.780 | Not significant |
+| Rainy | 0.0134 | 0.0016 | Significant increase |
+| Hot | -0.0280 | <0.001 | Significant decrease |
+| Clear | -0.0287 | <0.001 | Significant decrease |
+
+**Model Summary:**  
+R² = 0.0048 | F = 30.18 (p < 0.001)
+
+**Interpretation:**  
+Rainy weather increases delivery failures, while hot and clear weather significantly reduce failure rates. Foggy weather has no meaningful effect.
+
+---
+
+## 💰 Weather Impact on Delivery Cost
+
+| Metric | Value |
+|--------|------|
+| R² | 0.00005 |
+| F-statistic | 0.257 |
+| p-value | 0.937 |
+
+**Interpretation:**  
+Weather conditions do not significantly influence delivery cost. Cost remains driven by operational factors such as distance and package weight.
 
 ---
 
@@ -107,3 +132,4 @@ The regression results indicate that weather conditions do not significantly inf
 ---
 
 ## 📁 Project Structure
+---
