@@ -133,6 +133,6 @@ Weather conditions do not significantly influence delivery cost. Cost remains dr
 
 ## 📁 Project Structure
 ---
-I am open to collaborations on DAta Analysis, Statistical Analysis, and Visualization related projects
+I am open to collaborations on Data Analysis, Statistical Analysis, and Visualization related projects
 Reach me via email funmilayoajala4@gmail.com , let's discuss.
 
