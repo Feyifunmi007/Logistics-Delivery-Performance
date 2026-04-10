@@ -1,6 +1,6 @@
 # 🚚 Delivery Performance Analysis
 
-![Image](https://github.com/user-attachments/assets/32d87f2d-0f3a-4337-aa2f-7b6b9e3b04a8)
+![Image](https://github.com/user-attachments/assets/1c981962-a004-46b0-8141-f15d0c8b9f66)
 
 ## 📌 Project Overview
 This project analyzes delivery operations to identify key factors influencing delivery success, delays, failures, and cost efficiency. Using regression analysis and descriptive statistics, the study provides data-driven insights to support logistics planning and operational decision-making.
@@ -133,3 +133,6 @@ Weather conditions do not significantly influence delivery cost. Cost remains dr
 
 ## 📁 Project Structure
 ---
+I am open to collaborations on DAta Analysis, Statistical Analysis, and Visualization related projects
+Reach me via email funmilayoajala4@gmail.com , let's discuss.
+
